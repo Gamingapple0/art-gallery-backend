@@ -56,7 +56,7 @@ public class ArtistService {
 		return repo.save(updatedArtist);
 	}
 	
-	public boolean deleteArtifact(int id) {
+	public boolean deleteArtist(int id) {
 		if (repo.findById(id).isEmpty()) {return false;}
 		repo.deleteById(id);
 		return true;

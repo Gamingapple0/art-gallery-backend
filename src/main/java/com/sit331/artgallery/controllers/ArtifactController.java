@@ -30,13 +30,13 @@ public class ArtifactController {
 	
 	private List<ArtifactDTO> AllArtifacts; 
 	
-	@GetMapping("/artifacts")
+	@GetMapping("/api/artifacts")
 	public List<ArtifactDTO> getArtifacts() {
 		AllArtifacts = artifactService.getAllArtifacts();
 		return AllArtifacts;
 	}
 	
-	@PostMapping("/artifacts")
+	@PostMapping("/api/artifacts")
 	public ResponseEntity<?> createArtifact(@RequestBody @Valid ArtifactDTO newArtifact) {
 		AllArtifacts = artifactService.getAllArtifacts();
 		if (verificationUtil.stringHasValue(newArtifact.getName()) 
@@ -52,7 +52,7 @@ public class ArtifactController {
 	}
 	
 	
-	@PutMapping("/artifacts")
+	@PutMapping("/api/artifacts")
 	public ResponseEntity<?> updateArtifact(@RequestBody Artifact updatedArtifact) {
 		AllArtifacts = artifactService.getAllArtifacts();
 		if (verificationUtil.stringHasValue(updatedArtifact.getName()) 
@@ -67,7 +67,7 @@ public class ArtifactController {
         return new ResponseEntity<>("Body and Title should not be empty", HttpStatus.BAD_REQUEST);	
 	}
 	
-	@DeleteMapping("/artifacts/{id}")
+	@DeleteMapping("/api/artifacts/{id}")
 	public ResponseEntity<String> deleteArtifact(@PathVariable("id") int id) {
 		AllArtifacts = artifactService.getAllArtifacts();
 		if (artifactService.deleteArtifact(id)) {

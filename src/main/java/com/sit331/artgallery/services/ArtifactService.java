@@ -57,7 +57,7 @@ public class ArtifactService {
 	}
 	
 	public Artifact updateArtifact(Artifact updatedArtifact) {
-		// Can't create artifact without existing artist and art types
+		// Shouldn't be able to create artifact without existing artist and art types
 		if (!artistRepo.existsById(updatedArtifact.getArtist().getId())) {
 			throw new NoSuchElementException("Artist not found with ID: " + updatedArtifact.getArtist().getId());
 		}

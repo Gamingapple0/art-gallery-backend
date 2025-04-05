@@ -24,13 +24,13 @@ public class ArtFactsController {
 	
 	private List<ArtFact> AllArtFacts; 
 	
-	@GetMapping("/art-facts")
+	@GetMapping("/api/art-facts")
 	public List<ArtFact> getArtFacts() {
 		AllArtFacts = artFactService.getAllArtFacts();
 		return AllArtFacts;
 	}
 	
-	@PostMapping("/art-facts")
+	@PostMapping("/api/art-facts")
 	public ResponseEntity<?> createArtFact(@RequestBody ArtFact newArtFact) {
 		AllArtFacts = artFactService.getAllArtFacts();
 		if (verificationUtil.stringHasValue(newArtFact.getFactBody()) && verificationUtil.stringHasValue(newArtFact.getFactTitle())) {
@@ -41,7 +41,7 @@ public class ArtFactsController {
 	}
 	
 	
-	@PutMapping("/art-facts")
+	@PutMapping("/api/art-facts")
 	public ResponseEntity<?> updatedArtFact(@RequestBody ArtFact updatedArtFact) {
 		AllArtFacts = artFactService.getAllArtFacts();
 		if (verificationUtil.stringHasValue(updatedArtFact.getFactBody()) && verificationUtil.stringHasValue(updatedArtFact.getFactTitle())) {
@@ -51,7 +51,7 @@ public class ArtFactsController {
         return new ResponseEntity<>("Body and Title should not be empty", HttpStatus.BAD_REQUEST);	
 	}
 	
-	@DeleteMapping("/art-facts/{id}")
+	@DeleteMapping("/api/art-facts/{id}")
 	public ResponseEntity<String> deleteArtFact(@PathVariable("id") int id) {
 		AllArtFacts = artFactService.getAllArtFacts();
 		if (artFactService.deleteArtFact(id)) {
