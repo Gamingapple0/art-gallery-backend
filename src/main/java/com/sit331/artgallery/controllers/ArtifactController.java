@@ -5,19 +5,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.base.Optional;
 import com.sit331.artgallery.dto.ArtifactDTO;
+import com.sit331.artgallery.dto.BidNoArtifactDTO;
 import com.sit331.artgallery.entities.ArtType;
 import com.sit331.artgallery.entities.Artifact;
+import com.sit331.artgallery.entities.Bid;
 import com.sit331.artgallery.entities.Artifact;
 import com.sit331.artgallery.services.ArtifactService;
+import com.sit331.artgallery.services.BidService;
 import com.sit331.artgallery.services.ArtifactService;
 import com.sit331.artgallery.util.verificationUtil;
 
@@ -28,12 +34,22 @@ public class ArtifactController {
 	@Autowired
 	private ArtifactService artifactService;
 	
+	@Autowired
+	private BidService bidService;
+	
 	private List<ArtifactDTO> AllArtifacts; 
 	
 	@GetMapping("/api/artifacts")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public List<ArtifactDTO> getArtifacts() {
 		AllArtifacts = artifactService.getAllArtifacts();
 		return AllArtifacts;
+	}
+	
+	@GetMapping("/api/artifacts/{id}")
+	@CrossOrigin(origins = "http://localhost:3000")
+	public ArtifactDTO getArtifact(@PathVariable("id") int id) {
+		return AllArtifacts.get(id);
 	}
 	
 	@PostMapping("/api/artifacts")
@@ -65,6 +81,15 @@ public class ArtifactController {
 	        return new ResponseEntity<>(updatedArtifact1, HttpStatus.CREATED);	
 		}
         return new ResponseEntity<>("Body and Title should not be empty", HttpStatus.BAD_REQUEST);	
+	}
+	
+	@PostMapping("/api/artifacts/{id}/bid")
+	public ResponseEntity<?> addBid(@RequestBody Bid newBid, @PathVariable("id") int id)
+	{
+		Artifact artifact = artifactService.getArtifactById(id);
+		newBid.setBidArtifact(artifact);
+		BidNoArtifactDTO newBidDTO = new BidNoArtifactDTO(bidService.createBid(newBid));
+        return new ResponseEntity<>(newBidDTO, HttpStatus.ACCEPTED);	
 	}
 	
 	@DeleteMapping("/api/artifacts/{id}")

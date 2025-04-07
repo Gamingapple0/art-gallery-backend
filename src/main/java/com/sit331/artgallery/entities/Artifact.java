@@ -7,9 +7,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sit331.artgallery.dto.ArtifactDTO;
 import com.sit331.artgallery.dto.ArtistBasicDTO;
+import com.sit331.artgallery.dto.BidNoArtifactDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,9 +44,12 @@ public class Artifact {
 	@JoinColumn(name = "artist_id")
 	@JsonBackReference
 	private Artist artist;
+	
+    @OneToMany(mappedBy = "bidArtifact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Bid> bids;
 
     public Artifact() {}
-	public Artifact(Integer id, String name, Float price, String imgURL, List<ArtType> artTypes, Artist artist, String description) {
+	public Artifact(Integer id, String name, Float price, String imgURL, List<ArtType> artTypes, Artist artist, String description, List<Bid> bids) {
 		super();
 		this.id = id;
 		Name = name;
@@ -52,6 +58,7 @@ public class Artifact {
 		ArtTypes = artTypes;
 		this.artist = artist;
 		Description = description;
+		this.bids = this.bids;
 	}
 	
     public Artifact(ArtifactDTO artifactDTO) {
@@ -62,6 +69,7 @@ public class Artifact {
 		ArtTypes = artifactDTO.getArtTypes();
 		this.artist = new Artist(artifactDTO.getArtist());
 		Description = artifactDTO.getDescription();
+		this.bids = artifactDTO.getBids().stream().map((bidDTO)->new Bid(bidDTO)).toList();
     }
 
 	public String getName() {
@@ -72,6 +80,12 @@ public class Artifact {
 		Name = name;
 	}
 
+	public List<Bid> getBids() {
+		return bids;
+	}
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
+	}
 	public Float getPrice() {
 		return Price;
 	}

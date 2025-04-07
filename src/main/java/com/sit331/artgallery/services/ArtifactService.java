@@ -32,6 +32,11 @@ public class ArtifactService {
 		return repo.findAll().stream().map(ArtifactDTO::new).toList();
 	}
 	
+	public Artifact getArtifactById(int id) {
+		Optional<Artifact> artifactOptional = repo.findById(id);
+		return artifactOptional.get();
+	}
+	
 	// Can't create artifact without existing artist and art types
 	public Artifact createArtifact(@Valid ArtifactDTO newArtifactDTO) {
 		List<ArtType> artTypes= newArtifactDTO.getArtTypes();

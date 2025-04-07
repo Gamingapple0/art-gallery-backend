@@ -5,6 +5,7 @@ import java.util.List;
 import com.sit331.artgallery.entities.ArtType;
 import com.sit331.artgallery.entities.Artifact;
 import com.sit331.artgallery.entities.Artist;
+import com.sit331.artgallery.entities.Bid;
 
 public class ArtifactDTO {
     private Integer id;
@@ -13,6 +14,7 @@ public class ArtifactDTO {
     private Float price;
     private String imgURL;
     private List<ArtType> artTypes;
+	private List<BidNoArtifactDTO> bids; // Reference Bids without artifacts
     private ArtistBasicDTO artist; // Reference artist without artifacts
 
     // Constructor
@@ -26,7 +28,16 @@ public class ArtifactDTO {
         this.imgURL = artifact.getImgURL();
         this.artTypes = artifact.getArtTypes();
         this.artist = new ArtistBasicDTO(artifact.getArtist());
+		this.bids = artifact.getBids().stream().map((bid)->new BidNoArtifactDTO(bid)).toList();
     }
+
+	public List<BidNoArtifactDTO> getBids() {
+		return bids;
+	}
+
+	public void setBids(List<BidNoArtifactDTO> bids) {
+		this.bids = bids;
+	}
 
 	public Integer getId() {
 		return id;
