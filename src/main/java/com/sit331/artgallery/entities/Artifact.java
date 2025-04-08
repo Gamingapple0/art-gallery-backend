@@ -1,5 +1,6 @@
 package com.sit331.artgallery.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -69,7 +70,14 @@ public class Artifact {
 		ArtTypes = artifactDTO.getArtTypes();
 		this.artist = new Artist(artifactDTO.getArtist());
 		Description = artifactDTO.getDescription();
-		this.bids = artifactDTO.getBids().stream().map((bidDTO)->new Bid(bidDTO)).toList();
+		List<BidNoArtifactDTO> bidDTOs = artifactDTO.getBids();
+		if (bidDTOs != null) {
+			this.bids = artifactDTO.getBids().stream().map((bidDTO)->new Bid(bidDTO)).toList();	
+		}
+		else {
+			this.bids = new ArrayList<Bid>();
+		}
+		
     }
 
 	public String getName() {

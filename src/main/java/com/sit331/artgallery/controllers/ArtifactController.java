@@ -84,12 +84,13 @@ public class ArtifactController {
 	}
 	
 	@PostMapping("/api/artifacts/{id}/bid")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<?> addBid(@RequestBody Bid newBid, @PathVariable("id") int id)
 	{
 		Artifact artifact = artifactService.getArtifactById(id);
 		newBid.setBidArtifact(artifact);
 		BidNoArtifactDTO newBidDTO = new BidNoArtifactDTO(bidService.createBid(newBid));
-        return new ResponseEntity<>(newBidDTO, HttpStatus.ACCEPTED);	
+        return new ResponseEntity<>(newBidDTO, HttpStatus.OK);	
 	}
 	
 	@DeleteMapping("/api/artifacts/{id}")
