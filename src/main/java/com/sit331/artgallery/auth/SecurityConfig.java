@@ -57,21 +57,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-    
-    @Bean(name = DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
-    public DispatcherServlet dispatcherServlet() {
-        DispatcherServlet dispatcherServlet = new DispatcherServlet();
-        dispatcherServlet.setDispatchOptionsRequest(true);
-        return dispatcherServlet;
-    }
-    
-    @Bean
-    public StrictHttpFirewall httpFirewall() {
-
-        StrictHttpFirewall firewall = new StrictHttpFirewall();
-        firewall.setAllowedHttpMethods(Arrays.asList("GET", "POST", "OPTIONS", "FOO"));
-
-        return firewall;
-    }
-
 }
