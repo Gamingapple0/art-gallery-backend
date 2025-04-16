@@ -1,7 +1,9 @@
 package com.sit331.artgallery.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sit331.artgallery.entities.ArtType;
 import com.sit331.artgallery.entities.Artifact;
 import com.sit331.artgallery.entities.Artist;
@@ -14,6 +16,9 @@ public class ArtifactDTO {
     private Float price;
     private String imgURL;
     private List<ArtType> artTypes;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd") 
+	private LocalDate endDate;
 	private List<BidNoArtifactDTO> bids; // Reference Bids without artifacts
     private ArtistBasicDTO artist; // Reference artist without artifacts
 
@@ -27,9 +32,18 @@ public class ArtifactDTO {
         this.price = artifact.getPrice();
         this.imgURL = artifact.getImgURL();
         this.artTypes = artifact.getArtTypes();
+        this.endDate = artifact.getEndDate();
         this.artist = new ArtistBasicDTO(artifact.getArtist());
 		this.bids = artifact.getBids().stream().map((bid)->new BidNoArtifactDTO(bid)).toList();
     }
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
 
 	public List<BidNoArtifactDTO> getBids() {
 		return bids;

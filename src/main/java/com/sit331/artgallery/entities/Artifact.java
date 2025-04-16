@@ -1,9 +1,11 @@
 package com.sit331.artgallery.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sit331.artgallery.dto.ArtifactDTO;
@@ -48,9 +50,12 @@ public class Artifact {
 	
     @OneToMany(mappedBy = "bidArtifact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Bid> bids;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd") 
+	private LocalDate endDate;
 
     public Artifact() {}
-	public Artifact(Integer id, String name, Float price, String imgURL, List<ArtType> artTypes, Artist artist, String description, List<Bid> bids) {
+	public Artifact(Integer id, String name, Float price, String imgURL, List<ArtType> artTypes, Artist artist, String description, LocalDate endDate,List<Bid> bids) {
 		super();
 		this.id = id;
 		Name = name;
@@ -60,6 +65,7 @@ public class Artifact {
 		this.artist = artist;
 		Description = description;
 		this.bids = this.bids;
+		this.endDate = endDate;
 	}
 	
     public Artifact(ArtifactDTO artifactDTO) {
@@ -70,6 +76,7 @@ public class Artifact {
 		ArtTypes = artifactDTO.getArtTypes();
 		this.artist = new Artist(artifactDTO.getArtist());
 		Description = artifactDTO.getDescription();
+		this.endDate = artifactDTO.getEndDate();
 		List<BidNoArtifactDTO> bidDTOs = artifactDTO.getBids();
 		if (bidDTOs != null) {
 			this.bids = artifactDTO.getBids().stream().map((bidDTO)->new Bid(bidDTO)).toList();	
@@ -80,6 +87,12 @@ public class Artifact {
 		
     }
 
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
 	public String getName() {
 		return Name;
 	}
