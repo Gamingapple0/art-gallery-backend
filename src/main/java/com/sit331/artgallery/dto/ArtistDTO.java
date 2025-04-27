@@ -101,7 +101,6 @@ public class ArtistDTO {
 	    private List<Artifact> artistArtifacts;
 	    
 	    public ArtistDTO() {}
-	    // Constructor
 	    public ArtistDTO(Artist artist) {
 	        this.id = artist.getId();
 	        this.firstName = artist.getFirstName();

@@ -1,5 +1,6 @@
 package com.sit331.artgallery.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class ArtifactController {
 	
 	@Autowired
 	private BidService bidService;
-	
+	LocalDate today = LocalDate.now();
+
 	private List<ArtifactDTO> AllArtifacts; 
 	
 	@GetMapping("/api/artifacts")
@@ -59,12 +61,14 @@ public class ArtifactController {
 				&& verificationUtil.floatHasValue(newArtifact.getPrice()) 
 				&& newArtifact.getArtist() != null 
 				&& !newArtifact.getArtTypes().isEmpty()
+				&& newArtifact.getEndDate() != null
+				&& (newArtifact.getEndDate().isAfter(today) || newArtifact.getEndDate().equals(today))
 			) 
 		{
 			Artifact createdArtifact = artifactService.createArtifact(newArtifact);
 	        return new ResponseEntity<>(createdArtifact, HttpStatus.CREATED);	
 		}
-        return new ResponseEntity<>("Name, Price, Artist cannot be empty", HttpStatus.BAD_REQUEST);	
+        return new ResponseEntity<>("Name, Price, Artist, End Date cannot be empty, and End date must be in the present or future", HttpStatus.BAD_REQUEST);	
 	}
 	
 	
@@ -75,6 +79,8 @@ public class ArtifactController {
 				&& verificationUtil.floatHasValue(updatedArtifact.getPrice()) 
 				&& updatedArtifact.getArtist() != null 
 				&& !updatedArtifact.getArtTypes().isEmpty()
+				&& updatedArtifact.getEndDate() != null
+				&& (updatedArtifact.getEndDate().isAfter(today) || updatedArtifact.getEndDate().equals(today))
 			) 
 		{
 			Artifact updatedArtifact1 = artifactService.updateArtifact(updatedArtifact);

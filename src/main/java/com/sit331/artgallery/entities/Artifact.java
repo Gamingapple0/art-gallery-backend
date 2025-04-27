@@ -1,6 +1,7 @@
 package com.sit331.artgallery.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.firebase.database.annotations.NotNull;
 import com.sit331.artgallery.dto.ArtifactDTO;
 import com.sit331.artgallery.dto.ArtistBasicDTO;
 import com.sit331.artgallery.dto.BidNoArtifactDTO;
@@ -54,7 +56,6 @@ public class Artifact {
     @JsonFormat(pattern = "yyyy-MM-dd") 
 	private LocalDate endDate;
 
-    public Artifact() {}
 	public Artifact(Integer id, String name, Float price, String imgURL, List<ArtType> artTypes, Artist artist, String description, LocalDate endDate,List<Bid> bids) {
 		super();
 		this.id = id;
@@ -67,6 +68,7 @@ public class Artifact {
 		this.bids = this.bids;
 		this.endDate = endDate;
 	}
+
 	
     public Artifact(ArtifactDTO artifactDTO) {
 		this.id = artifactDTO.getId();;
@@ -86,6 +88,14 @@ public class Artifact {
 		}
 		
     }
+
+
+
+
+
+	public Artifact() {
+	}
+
 
 	public LocalDate getEndDate() {
 		return endDate;

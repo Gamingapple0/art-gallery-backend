@@ -30,7 +30,6 @@ public class ArtistService {
 		if (emailExists) {
             throw new IllegalArgumentException("The email " + newArtist.getEmail() + " already exists.");
 		}
-//		newArtist.setArtWorks(new ArrayList<Artifact>());
 		return repo.save(newArtist);
 	}
 	

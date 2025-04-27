@@ -20,21 +20,17 @@ public class FirebaseConfig {
 
     @Bean
     FirebaseApp firebaseApp() throws IOException {
+        if (FirebaseApp.getApps().isEmpty()) {
+
         ClassPathResource resource = new ClassPathResource("./art-gallery-firebase-service-account.json"); 
         InputStream serviceAccount = resource.getInputStream();
-
-//        FirebaseOptions options = FirebaseOptions.builder()
-//            .setProjectId("fir-fileuploadapi") 
-//            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//            .setStorageBucket("fir-fileuploadapi.appspot.com") 
-//            .setDatabaseUrl("https://fir-fileuploadapi-default-rtdb.firebaseio.com")
-//            .build();
         
 	    FirebaseOptions options = FirebaseOptions.builder()
 	      .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 	      .build();
 	
-
         return FirebaseApp.initializeApp(options);
+        }
+        return FirebaseApp.getInstance(); // Return existing instance
     }
 }

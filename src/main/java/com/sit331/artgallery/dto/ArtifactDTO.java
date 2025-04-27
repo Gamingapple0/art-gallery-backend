@@ -22,7 +22,6 @@ public class ArtifactDTO {
 	private List<BidNoArtifactDTO> bids; // Reference Bids without artifacts
     private ArtistBasicDTO artist; // Reference artist without artifacts
 
-    // Constructor
     public ArtifactDTO() {}
     
     public ArtifactDTO(Artifact artifact) {

@@ -34,7 +34,6 @@ public class Bid {
 		this.originalPrice = bidDTO.getOriginalPrice();
 		this.newBid = bidDTO.getNewBid();
 		this.newBidder = bidDTO.getNewBidder();
-//		this.bidArtifact = bidArtifact;
 		this.timestamp = timestamp;
 	}
 
@@ -91,10 +90,6 @@ public class Bid {
 
 	public void setBidArtifact(Artifact bidArtifact) {
 	    this.bidArtifact = bidArtifact;
-	    
-//	    if (bidArtifact != null && !bidArtifact.getBids().contains(this)) {
-//	        bidArtifact.getBids().add(this);
-//	    }
 	    }
 
 	public LocalDateTime getTimestamp() {

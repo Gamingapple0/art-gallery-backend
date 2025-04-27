@@ -79,6 +79,11 @@ public class ArtistController {
 		return new ResponseEntity<String>("Artist Not Found", HttpStatus.NOT_FOUND);
 	}
 
+	public ResponseEntity<?> getAllArtists() {
+		AllArtists = artistService.getAllArtists();
+		return new ResponseEntity<>(AllArtists, HttpStatus.OK);	
+	}
+
 
 
 	

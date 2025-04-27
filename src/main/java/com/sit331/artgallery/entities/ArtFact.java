@@ -27,9 +27,17 @@ public class ArtFact {
 	public ArtFact() {}
 
 	public ArtFact(Integer Id, String factTitle, String factBody) {
-		id = Id; 
+		setId(Id); 
 		FactTitle = factTitle;
 		FactBody = factBody;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Id

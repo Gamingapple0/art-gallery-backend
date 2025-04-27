@@ -34,9 +34,9 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))  // Enable CORS explicitly
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(new AntPathRequestMatcher("/api/**", "POST")).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/api/**", "PUT")).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/api/**", "DELETE")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/api/**", "POST")).authenticated()
+                .requestMatchers(new AntPathRequestMatcher("/api/**", "PUT")).authenticated()
+                .requestMatchers(new AntPathRequestMatcher("/api/**", "DELETE")).authenticated()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers(new AntPathRequestMatcher("/api/**", "GET")).permitAll()
             )

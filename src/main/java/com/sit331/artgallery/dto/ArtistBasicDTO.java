@@ -85,7 +85,6 @@ public class ArtistBasicDTO {
     
     public ArtistBasicDTO() {}
 
-    // Constructor
     public ArtistBasicDTO(Artist artist) {
         this.id = artist.getId();
         this.firstName = artist.getFirstName();
