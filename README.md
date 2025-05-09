@@ -10,6 +10,7 @@ This is the Spring Boot backend for the Aboriginal Art Gallery Web Application. 
 - Spring Data JPA
 - Firebase Admin SDK (for verifying Firebase Auth tokens)
 - Event-Driven Architecture with Domain Driven Design
+- JUnit Testing Framework
 - 6 Bounded Contexts (Artist, Artifact, Art Fact, Art Type, User, Bid)
 
 ---
@@ -21,6 +22,7 @@ This is the Spring Boot backend for the Aboriginal Art Gallery Web Application. 
 - Auction lifecycle handling (listing, bidding, closing)
 - Role-based access policies (read-only access for all; bid-access for signed-in users, write acess for admins)
 - Event logging and audit trails
+- Unit testing using JUnit
 
 ---
 

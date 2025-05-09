@@ -86,7 +86,7 @@ public class ArtifactController {
 			Artifact updatedArtifact1 = artifactService.updateArtifact(updatedArtifact);
 	        return new ResponseEntity<>(updatedArtifact1, HttpStatus.CREATED);	
 		}
-        return new ResponseEntity<>("Body and Title should not be empty", HttpStatus.BAD_REQUEST);	
+        return new ResponseEntity<>("Name, Price, Artist, End Date cannot be empty, and End date must be in the present or future", HttpStatus.BAD_REQUEST);	
 	}
 	
 	@PostMapping("/api/artifacts/{id}/bid")
