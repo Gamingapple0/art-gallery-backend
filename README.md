@@ -2,12 +2,14 @@
 
 This is the Spring Boot backend for the Aboriginal Art Gallery Web Application. The backend is responsible for business logic, role-based authentication, bid management, artifact lifecycle handling, and persistence using PostgreSQL.
 
+Frontend Repo: https://github.com/Gamingapple0/art-gallery (React Framework, Firebase OAuth)
+
 ## 📦 Tech Stack
 
 - Java 17
 - Spring Boot
 - PostgreSQL
-- Spring Data JPA
+- Spring Data Hiberate JPA (Object Relational Mapping Library)
 - Firebase Admin SDK (for verifying Firebase Auth tokens)
 - Event-Driven Architecture with Domain Driven Design
 - JUnit Testing Framework
