@@ -46,10 +46,6 @@ All modifying endpoints require a valid Firebase Bearer token, verified by the F
 
 Example request header:
 
-## 📁 Project Structure
-
-The backend uses Firebase Admin SDK to verify tokens from the frontend. All modifying endpoints require a valid Bearer token.
-
 ```Authorization: Bearer <FIREBASE_ID_TOKEN>```
 
 ## Aggregate Canvas
