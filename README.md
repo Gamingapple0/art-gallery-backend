@@ -1,32 +1,50 @@
-# Aboriginal Art Gallery — Backend
+# Aboriginal Art Gallery - Backend
 
-This is the Spring Boot backend for the Aboriginal Art Gallery Web Application. The backend is responsible for business logic, role-based authentication, bid management, artifact lifecycle handling, and persistence using PostgreSQL.
+This is the Spring Boot backend for the Aboriginal Art Gallery Web Application. It handles the core business logic, including role-based authentication, auction and bid management, artifact lifecycle operations, and data persistence using PostgreSQL.
 
-Frontend Repo: https://github.com/Gamingapple0/art-gallery (React Framework, Firebase OAuth)
+**Frontend Repository:** [https://github.com/Gamingapple0/art-gallery](https://github.com/Gamingapple0/art-gallery)  
+(Built with React and Firebase OAuth)
+
+---
 
 ## 📦 Tech Stack
 
-- Java 17
-- Spring Boot
-- PostgreSQL
-- Spring Data Hiberate JPA (Object Relational Mapping Library)
-- Firebase Admin SDK (for verifying Firebase Auth tokens)
-- Event-Driven Architecture with Domain Driven Design
-- JUnit Testing Framework
-- 6 Bounded Contexts (Artist, Artifact, Art Fact, Art Type, User, Bid)
+- **Java 17**  
+- **Spring Boot**  
+- **PostgreSQL**  
+- **Spring Data JPA** (Hibernate ORM)  
+- **Firebase Admin SDK** (for verifying Firebase authentication tokens)  
+- **Event-Driven Architecture** with **Domain-Driven Design (DDD)**  
+- **JUnit** (for unit testing)  
+- **6 Bounded Contexts**:  
+  - Artist  
+  - Artifact  
+  - Art Fact  
+  - Art Type  
+  - User  
+  - Bid
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-- CRUD operations for Artifacts, Bids, Artists, Art Facts, and Art Types
-- Firebase-authenticated OAuth Google user verification
-- Auction lifecycle handling (listing, bidding, closing)
-- Role-based access policies (read-only access for all; bid-access for signed-in users, write acess for admins)
-- Event logging and audit trails
-- Unit testing using JUnit
+- Full **CRUD** support for Artifacts, Artists, Bids, Art Facts, and Art Types  
+- **Google OAuth** authentication via Firebase  
+- **Auction lifecycle management**: listing, bidding, closing  
+- **Role-based access control**:  
+  - *Read-only* access for all users  
+  - *Bidding* allowed for authenticated users  
+  - *Write* access restricted to admins  
+- **Event logging** and **audit trails** for key actions  
+- **Unit testing** implemented using JUnit
 
 ---
+
+## 🔐 Authentication
+
+All modifying endpoints require a valid Firebase Bearer token, verified by the Firebase Admin SDK.
+
+Example request header:
 
 ## 📁 Project Structure
 
